@@ -13,10 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.utl.candyapp.fragments.CatalogoFragment;
 import org.utl.candyapp.ui.main.SectionsPagerAdapter;
 import org.utl.candyapp.databinding.ActivityHomeBinding;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity  {
 
     private ActivityHomeBinding binding;
 

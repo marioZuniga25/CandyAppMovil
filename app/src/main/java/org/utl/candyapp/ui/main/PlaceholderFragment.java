@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.utl.candyapp.R;
 import org.utl.candyapp.databinding.FragmentHomeBinding;
+import org.utl.candyapp.fragments.CatalogoFragment;
+import org.utl.candyapp.fragments.HistorialFragment;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,11 +27,17 @@ public class PlaceholderFragment extends Fragment {
     private PageViewModel pageViewModel;
     private FragmentHomeBinding binding;
 
-    public static PlaceholderFragment newInstance(int index) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
+    public static Fragment newInstance(int index) {
+        Fragment fragment = null;
+
+        switch (index){
+
+            case 1: fragment = new CatalogoFragment(); break;
+            case 2: fragment = new HistorialFragment(); break;
+
+        }
+
+
         return fragment;
     }
 
