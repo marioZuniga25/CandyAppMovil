@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CatalogoFragment extends Fragment {
 
 
-    private static String URL_BASE = "http://10.16.17.147:8080/heelpdeck_Desk/api/";
+    private static String URL_BASE = "http://192.168.100.235:8080/CandyDayApis/api/";
     public List<Producto> listaProductos = new ArrayList<>();
     RecyclerView recyclerViewProducto;
     myAdapterProducto myAdapter;
