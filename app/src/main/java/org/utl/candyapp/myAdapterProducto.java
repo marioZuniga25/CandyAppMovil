@@ -23,9 +23,9 @@ public class myAdapterProducto extends RecyclerView.Adapter <myAdapterProducto.M
         List<Producto> listaProductos;
 
 
-        public myAdapterProducto(Context context, List<Producto> listaEmpleados) {
+        public myAdapterProducto(Context context, List<Producto> listaProductos) {
             this.context = context;
-            this.listaProductos = listaEmpleados;
+            this.listaProductos = listaProductos;
         }
 
         @NonNull
@@ -38,8 +38,8 @@ public class myAdapterProducto extends RecyclerView.Adapter <myAdapterProducto.M
         @Override
         public void onBindViewHolder(@NonNull MyProductoViewHolder holder, int position) {
             Producto p = listaProductos.get(position);
-            holder.txtNombreEmpleado.setText(p.getNombreProducto());
-            holder.txtDepartamento.setText(String.valueOf(p.getPrecioVenta()));
+            holder.txtNombreProducto.setText(p.getNombreProducto());
+            holder.txtPrecioVenta.setText(String.valueOf(p.getPrecioVenta()));
 
             byte [] bytes = Base64.decode(p.getFotografia(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
@@ -65,17 +65,17 @@ public class myAdapterProducto extends RecyclerView.Adapter <myAdapterProducto.M
 
         public static class MyProductoViewHolder extends RecyclerView.ViewHolder {
 
-            TextView txtNombreEmpleado;
-            TextView txtDepartamento;
+            TextView txtNombreProducto;
+            TextView txtPrecioVenta;
             ImageView imgEmpleado;
 
 
             public MyProductoViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                txtNombreEmpleado = itemView.findViewById(R.id.lblNombreEmpleado);
-                txtDepartamento = itemView.findViewById(R.id.lblDepartamento);
-                imgEmpleado = itemView.findViewById(R.id.imgEmpleado);
+                txtNombreProducto = itemView.findViewById(R.id.lblNombreProducto);
+                txtPrecioVenta = itemView.findViewById(R.id.lblPrecioProducto);
+                imgEmpleado = itemView.findViewById(R.id.imgProducto);
 
             }
         }

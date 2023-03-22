@@ -50,16 +50,11 @@ public class CatalogoFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment CatalogoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CatalogoFragment newInstance(String param1, String param2) {
-        CatalogoFragment fragment = new CatalogoFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
+    public static CatalogoFragment newInstance() {
+         CatalogoFragment fragment = new CatalogoFragment();
         return fragment;
     }
 
@@ -84,10 +79,11 @@ public class CatalogoFragment extends Fragment {
 
         recyclerViewProducto = view.findViewById(R.id.rvProducto);
         recyclerViewProducto.setLayoutManager(new LinearLayoutManager(getActivity()));
-        cargarEmpleados();
+        cargarProductos();
     }
 
-    public void cargarEmpleados(){
+    public void cargarProductos(){
+        System.out.println("Estamos dentro de cargarProductos");
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL_BASE)
@@ -98,26 +94,34 @@ public class CatalogoFragment extends Fragment {
         listadoProductos.enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                System.out.println("Codigo: "+ response.code());
-                if (response.code() == 200){
-                    for (Producto p: response.body())
-                    {
+                System.out.println("Codigo: " + response.code());
+                System.out.println("Estamos dentro de onResponse");
+                if (response.code() == 200) {
+                    for (Producto p : response.body()) {
                         listaProductos.add(p);
                         System.out.println(p.getNombreProducto());
                         System.out.println(p.getPrecioVenta());
                         System.out.println(p.getFotografia());
                     }
                     myAdapter = new myAdapterProducto(getActivity(), listaProductos);
+
                     recyclerViewProducto.setAdapter(myAdapter);
                     myAdapter.notifyDataSetChanged();
                     System.out.println(listaProductos.size());
-                }else if (response.code() == 404){
+                } else if (response.code() == 404) {
                     Toast.makeText(getContext(), "No hay nada en la lista", Toast.LENGTH_SHORT).show();
+                    myAdapter = new myAdapterProducto(getActivity(), listaProductos);
+                    recyclerViewProducto.setAdapter(myAdapter);
+                    myAdapter.notifyDataSetChanged();
                 }
             }
             @Override
             public void onFailure(Call<List<Producto>> call, Throwable t) {
+                System.out.println("Estamos dentro del onFailure" + call.request());
                 System.out.println("Fallo "+ t.toString());
+                myAdapter = new myAdapterProducto(getActivity(), listaProductos);
+                recyclerViewProducto.setAdapter(myAdapter);
+                myAdapter.notifyDataSetChanged();
             }
         });
     }
